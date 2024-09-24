@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Image</title>
+</head>
+<body>
+<h1>Employee Image</h1>
+
+<script>
+    // Get the employee ID from the query string
+    const urlParams = new URLSearchParams(window.location.search);
+    const employeeId = urlParams.get('employeeId');
+
+    if (employeeId) {
+        // Set the image source URL dynamically based on the employee ID
+        const imageUrl = `/view-image/${employeeId}`;
+
+        document.getElementById('employeeImage').src = imageUrl;
+    } else {
+        // Handle the case where employeeId is not present
+        document.body.innerHTML += '<p>No employee ID provided.</p>';
+    }
+</script>
+
+
+
+<img id="employeeImage" alt="Employee Image" style="width: 100%; height: auto;">
+
+</body>
+</html>

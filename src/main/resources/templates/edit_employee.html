@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Employee Managment System</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href=@{/employee}>Employee Data</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<div class = "container">
+    <div class = "row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container jusitfy-content-center card">
+            <h1 class = "text-center"> Update Employee</h1>
+            <div class = "card-body">
+                <form th:action="@{/employee/{id} (id=${employee.id})}" th:object = "${employee}" method="post">
+                    <div class = "form-group">
+                        <label> Employee First Name</label>
+                        <input
+                                type = "text"
+                                name = "firstName"
+                                th:field = "*{firstName}"
+                                class="form-control"
+                                placeholder="Enter Employee First name"
+                        />
+                    </div>
+                    <div class = "form-group">
+                        <label> Employee Last Name</label>
+                        <input
+                                type = "text"
+                                name = "lastname"
+                                th:field = "*{lastname}"
+                                class="form-control"
+                                placeholder="Enter Employee Last name"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Employee Email</label>
+                        <input type="email" name="Email" th:field="*{Email}" class="form-control" placeholder="Enter Employee Email"
+                               pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" title="Please enter a valid email address (e.g., example@domain.com)"
+                               id="emailInput" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employeeImage">Upload Employee Image</label>
+                        <input type="file" class="form-control-file" id="employeeImage" name="employeeImage" required>
+                    </div>
+                    <div class="footer-body">
+                        <button type="submit" class="btn btn-primary" onclick="validateForm(event)">Submit</button>
+
+                    </div>
+                </form>
+                <div id="messageContainer"  th:if="${message}">
+                    <p th:text="${message}" class="message"></p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    setTimeout(function() {
+        var messageContainer = document.getElementById('messageContainer');
+        if (messageContainer) {
+            messageContainer.style.display = 'none';
+        }
+    }, 3000); // 3 seconds
+</script>
+</body>
+</html>
